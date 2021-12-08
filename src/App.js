@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import './globals.css';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
