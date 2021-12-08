@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-unused-vars */
+import './globals.css';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import Header from './components/Header';
+import ClientList from './components/ClientList';
+import { useState } from 'react';
+import ClientDetails from './components/ClientDetails';
 
 function App() {
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const [showNav, setShowNav] = useState(false);
+  const toggleNav = () => {
+    setShowNav(!showNav);
+  };
+
+  const toggleSearchBar = () => {
+    setShowSearchBar(!showSearchBar);
+    setShowNav(false);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header
+        toggleSearchBar={toggleSearchBar}
+        toggleNav={toggleNav}
+        showNav={showNav}
+      />
+      <ClientList showSearchBar={showSearchBar} />
+      {/* <ClientDetails /> */}
+      {/* <SignUp /> */}
+      {/* <Login /> */}
     </div>
   );
 }

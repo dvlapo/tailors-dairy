@@ -1,0 +1,70 @@
+/* RESETS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+ul {
+  list-style: none;
+}
+html:focus-within {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  background-color: var(--bgColor);
+  font-family: 'Rubik', sans-serif;
+}
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root {
+  --lightColor: hsl(237, 15%, 75%);
+  --lighterColor: hsl(330, 67%, 98%);
+  --darkColor: hsl(230, 38%, 36%);
+  --darkColorTrans: rgba(39, 54, 138, 0.7);
+  --bgColor: #fff;
+  --listColor: rgba(126, 135, 189, 0.8);
+
+  /* gradient background */
+  --darkGradient: linear-gradient(
+    45deg,
+    hsl(230, 38%, 36%),
+    rgba(39, 54, 138, 0.8)
+  );
+}
