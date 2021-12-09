@@ -12,21 +12,34 @@ const Header = ({ toggleSearchBar, toggleNav, showNav, userName }) => {
       case 15:
       case 16:
         setGreeting('Good afternoon');
-
         break;
       case 17:
       case 18:
       case 19:
       case 20:
       case 21:
+      case 22:
+      case 23:
         setGreeting('Good evening');
-
         break;
       default:
         setGreeting('Good morning');
         break;
     }
   }, []);
+
+  // const addClient =async () => {
+  //   try {
+  //     const { data } = await axios.post(
+  //       'https://measure-client-api.herokuapp.com/api/v1/auth/clients',
+  //       // {name, gender, measurements: {lenghtOfDress, bust, halfLenght}}
+  //     );
+
+  //   } catch (error) {
+  //     console.log(error);
+
+  //   }
+  // }
 
   return (
     <HeaderContainerSyled>

@@ -10,6 +10,7 @@ const Login = ({
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [someError, setSomeError] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
@@ -18,13 +19,13 @@ const Login = ({
         'https://measure-client-api.herokuapp.com/api/v1/auth/login',
         { email, password }
       );
-      console.log(data, data.user.username, data.token);
 
       localStorage.setItem('token', data.token);
       setLoginSuccess(true);
       setUserName(data.user.username);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      setSomeError(true);
     }
   };
 
@@ -42,7 +43,10 @@ const Login = ({
           type="email"
           value={email}
           placeholder="Please enter your email address"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setSomeError(false);
+          }}
         />
 
         <label>Password:</label>
@@ -50,9 +54,12 @@ const Login = ({
           type="password"
           value={password}
           placeholder="******"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setSomeError(false);
+          }}
         />
-
+        {someError && <p className="error">Invalid email or password</p>}
         <p>
           Don't have an account? <span onClick={goToSignUp}>Sign up </span>
           instead.

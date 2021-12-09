@@ -24,6 +24,7 @@ body {
   line-height: 1.5;
   background-color: var(--bgColor);
   font-family: 'Rubik', sans-serif;
+  font-size: 20px;
 }
 a:not([class]) {
   text-decoration-skip-ink: auto;

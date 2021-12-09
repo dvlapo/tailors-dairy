@@ -10,6 +10,10 @@ const ClientList = ({ showSearchBar }) => {
     setSearchValue(e.target.value);
   };
 
+  const showDetails = (e) => {
+    console.log(e.target._id);
+  };
+
   const fetchClients = async () => {
     const token = localStorage.getItem('token');
     try {
@@ -47,7 +51,16 @@ const ClientList = ({ showSearchBar }) => {
         </div>
       )}
 
-      <h3>All Clients</h3>
+      {clients.length === 0 ? (
+        <>
+          <h2>No clients... &#128064;</h2>
+          <p>
+            Add new client <ion-icon name="add-circle-outline"></ion-icon>
+          </p>
+        </>
+      ) : (
+        <h3>All Clients</h3>
+      )}
       <ul>
         {clients
           // eslint-disable-next-line array-callback-return
@@ -63,7 +76,7 @@ const ClientList = ({ showSearchBar }) => {
           })
           .map((client) => {
             return (
-              <li key={client._id}>
+              <li key={client._id} onClick={showDetails}>
                 {client.name}
                 <span>
                   <i class="fa fa-pencil"></i>
@@ -117,10 +130,26 @@ const ClientListContainerStyled = styled.main`
       }
     }
   }
-  h3 {
+  h3,
+  h2 {
     text-align: center;
     margin-block: 0.8rem;
     color: var(--darkColor);
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ion-icon {
+      font-size: 1.3rem;
+    }
+  }
+  .no-clients,
+  p {
+    font-size: clamp(1rem, 0.9vw, 1.4rem);
+    color: var(--darkColor);
+    font-weight: 500;
   }
   ul {
     padding: 0;

@@ -34,7 +34,12 @@ function App() {
   return (
     <div>
       {signUpPage && (
-        <SignUp setSignUpPage={setSignUpPage} setLoginPage={setLoginPage} />
+        <SignUp
+          setSignUpPage={setSignUpPage}
+          setLoginPage={setLoginPage}
+          setLoginSuccess={setLoginSuccess}
+          setUserName={setUserName}
+        />
       )}
       {!loginSuccess && loginPage && (
         <Login
@@ -55,6 +60,7 @@ function App() {
           <ClientList showSearchBar={showSearchBar} />
         </>
       )}
+
       {/* <ClientDetails /> */}
     </div>
   );
