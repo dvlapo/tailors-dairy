@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const SignUp = () => {
+const SignUp = ({ setSignUpPage, setLoginPage }) => {
+  const goToLogin = () => {
+    setSignUpPage(false);
+    setLoginPage(true);
+  };
   return (
     <FormStyled>
       <h1>Sign Up For Free</h1>
@@ -13,6 +17,11 @@ const SignUp = () => {
         <input type="password" placeholder="******" />
         <label>Confirm password:</label>
         <input type="password" placeholder="******" />
+
+        <p>
+          Already have an account? <span onClick={goToLogin}>Login </span>
+          instead.
+        </p>
 
         <button>Sign Up</button>
       </form>
@@ -28,6 +37,10 @@ export const FormStyled = styled.div`
   max-width: 80vw;
   margin-inline: auto;
   margin-top: 30%;
+
+  @media (min-width: 425px) {
+    margin-top: 10%;
+  }
 
   h1 {
     font-size: clamp(1.2rem, 2vw, 3rem);
@@ -62,6 +75,7 @@ export const FormStyled = styled.div`
 
     span {
       color: var(--darkColor);
+      cursor: pointer;
     }
   }
 
@@ -73,5 +87,6 @@ export const FormStyled = styled.div`
     border: none;
     border-radius: 5px;
     color: #fff;
+    cursor: pointer;
   }
 `;

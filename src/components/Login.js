@@ -54,7 +54,7 @@ const Login = ({
         />
 
         <p>
-          Don't have an account, <span onClick={goToSignUp}>Sign up</span>{' '}
+          Don't have an account? <span onClick={goToSignUp}>Sign up </span>
           instead.
         </p>
         <button onClick={login}>Login</button>
