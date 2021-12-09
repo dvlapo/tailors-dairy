@@ -1,25 +1,37 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ClientList = ({ showSearchBar }) => {
-  const clients = [
-    { name: 'Puleng', id: 1 },
-    { name: 'Fikile', id: 2 },
-    { name: 'Mauve', id: 3 },
-    { name: 'Hazelgrace', id: 4 },
-    { name: 'Fatima', id: 5 },
-    { name: 'Mrs Coconuthead', id: 6 },
-    { name: 'Rabia', id: 7 },
-    { name: 'Ganiyu', id: 8 },
-    { name: 'Ademola', id: 9 },
-    { name: 'Maryam', id: 10 },
-  ];
-
+  const [clients, setClients] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
   const filterList = (e) => {
     setSearchValue(e.target.value);
   };
+
+  const fetchClients = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const {
+        data: { clients },
+      } = await axios.get(
+        'https://measure-client-api.herokuapp.com/api/v1/clients',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setClients(clients);
+    } catch (error) {
+      localStorage.removeItem('token');
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchClients();
+  }, [clients]);
 
   return (
     <ClientListContainerStyled>
@@ -51,10 +63,10 @@ const ClientList = ({ showSearchBar }) => {
           })
           .map((client) => {
             return (
-              <li key={client.id}>
+              <li key={client._id}>
                 {client.name}
                 <span>
-                  <ion-icon name="pencil-sharp"></ion-icon>
+                  <i class="fa fa-pencil"></i>
                 </span>
               </li>
             );
@@ -114,7 +126,7 @@ const ClientListContainerStyled = styled.main`
     padding: 0;
 
     li {
-      background-color: var(--darkColor);
+      background-color: #fff;
       padding: 0.3rem 0.8rem;
       margin-bottom: 1rem;
       display: flex;
@@ -122,18 +134,18 @@ const ClientListContainerStyled = styled.main`
       justify-content: space-between;
       border-radius: 7px;
       font-size: clamp(0.9rem, 0.8vw, 1.4rem);
+      color: var(--darkColor);
+      font-weight: 500;
+      box-shadow: 0 2px 3px -2px var(--lightColor);
+      cursor: pointer;
 
-      color: var(--lightColor);
-      box-shadow: 0 0 4px 2px var(--lightColor);
-
-      ion-icon {
-        background-color: var(--listColor);
+      .fa {
+        background-color: #fff;
         color: var(--darkColor);
-        border-radius: 6px;
-        padding: 0.2rem;
+        font-weight: 500;
+        font-size: 1.1rem;
         position: relative;
-        top: 0.2rem;
-        font-size: 0.8rem;
+        top: 2px;
         z-index: 1;
       }
     }

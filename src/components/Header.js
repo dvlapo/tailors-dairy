@@ -1,6 +1,33 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Header = ({ toggleSearchBar, toggleNav, showNav }) => {
+const Header = ({ toggleSearchBar, toggleNav, showNav, userName }) => {
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    switch (new Date().getHours()) {
+      case 12:
+      case 13:
+      case 14:
+      case 15:
+      case 16:
+        setGreeting('Good afternoon');
+
+        break;
+      case 17:
+      case 18:
+      case 19:
+      case 20:
+      case 21:
+        setGreeting('Good evening');
+
+        break;
+      default:
+        setGreeting('Good morning');
+        break;
+    }
+  }, []);
+
   return (
     <HeaderContainerSyled>
       <HeaderStyled>
@@ -9,6 +36,7 @@ const Header = ({ toggleSearchBar, toggleNav, showNav }) => {
         </div>
         {showNav && (
           <div className="nav">
+            <h3>{`${greeting}, ${userName} `} &#128515;</h3>
             <ul>
               <li>
                 All clients<ion-icon name="people-circle-sharp"></ion-icon>
@@ -40,7 +68,6 @@ const HeaderContainerSyled = styled.div`
   top: 0;
   min-width: 100vw;
   background-image: var(--darkGradient);
-  /* background-color: var(--darkColor); */
   z-index: 100;
 `;
 const HeaderStyled = styled.header`
@@ -68,7 +95,7 @@ const HeaderStyled = styled.header`
 
   .nav {
     position: absolute;
-    top: 7.1vh;
+    top: 7vh;
     left: 0;
     min-width: 45vw;
     min-height: 100vh;
@@ -79,6 +106,11 @@ const HeaderStyled = styled.header`
     display: flex;
     flex-direction: column;
 
+    h3 {
+      font-size: clamp(1rem, 1.1vw, 1.5rem);
+      color: var(--bgColor);
+      margin-left: 2.5vw;
+    }
     ul {
       position: relative;
       padding: 0;

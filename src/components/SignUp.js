@@ -55,6 +55,16 @@ export const FormStyled = styled.div`
     }
   }
 
+  p {
+    text-align: center;
+    font-size: clamp(0.8rem, 0.7vw, 0.9rem);
+    margin-block: 0.5rem;
+
+    span {
+      color: var(--darkColor);
+    }
+  }
+
   button {
     width: 100%;
     background-color: var(--darkColorTrans);
