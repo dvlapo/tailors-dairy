@@ -1,8 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import DataContext from '../context/DataContext';
+import { Link } from 'react-router-dom';
 
-const Header = ({ toggleSearchBar, toggleNav, showNav, userName }) => {
+const Header = ({ userName }) => {
   const [greeting, setGreeting] = useState('');
+  const { toggleSearchBar, toggleNav, showNav } = useContext(DataContext);
+
+  const logOut = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
 
   useEffect(() => {
     switch (new Date().getHours()) {
@@ -28,19 +36,6 @@ const Header = ({ toggleSearchBar, toggleNav, showNav, userName }) => {
     }
   }, []);
 
-  // const addClient =async () => {
-  //   try {
-  //     const { data } = await axios.post(
-  //       'https://measure-client-api.herokuapp.com/api/v1/auth/clients',
-  //       // {name, gender, measurements: {lenghtOfDress, bust, halfLenght}}
-  //     );
-
-  //   } catch (error) {
-  //     console.log(error);
-
-  //   }
-  // }
-
   return (
     <HeaderContainerSyled>
       <HeaderStyled>
@@ -51,15 +46,19 @@ const Header = ({ toggleSearchBar, toggleNav, showNav, userName }) => {
           <div className="nav">
             <h3>{`${greeting}, ${userName} `} &#128515;</h3>
             <ul>
-              <li>
-                All clients<ion-icon name="people-circle-sharp"></ion-icon>
-              </li>
-              <li>
-                Add new client<ion-icon name="add-circle-outline"></ion-icon>
-              </li>
+              <Link to="/" onClick={toggleNav}>
+                <li>
+                  All clients<ion-icon name="people-circle-sharp"></ion-icon>
+                </li>
+              </Link>
+              <Link to="/add-client" onClick={toggleNav}>
+                <li>
+                  Add new client<ion-icon name="add-circle-outline"></ion-icon>
+                </li>
+              </Link>
             </ul>
 
-            <button>
+            <button onClick={logOut}>
               Log out<ion-icon name="log-out-outline"></ion-icon>
             </button>
           </div>
@@ -159,10 +158,14 @@ const HeaderStyled = styled.header`
       display: flex;
       gap: 0.5rem;
       align-items: center;
-      font-size: clamp(0.9rem, 1vw, 1.4rem);
+      font-size: clamp(1rem, 1.3vw, 1.4rem);
       background: none;
       padding: 0;
-      color: crimson;
+      color: red;
+
+      ion-icon {
+        color: red;
+      }
     }
   }
 

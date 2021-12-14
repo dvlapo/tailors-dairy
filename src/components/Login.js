@@ -24,7 +24,7 @@ const Login = ({
       setLoginSuccess(true);
       setUserName(data.user.username);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       setSomeError(true);
     }
   };

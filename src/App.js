@@ -4,13 +4,13 @@ import Login from './components/Login';
 import Header from './components/Header';
 import ClientList from './components/ClientList';
 import { useEffect, useState } from 'react';
-// import ClientDetails from './components/ClientDetails';
-// import axios from 'axios';
+import { DataProvider } from './context/DataContext';
+import AddClient from './components/AddClient';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ClientDetails from './components/ClientDetails';
 
 function App() {
   // states
-  const [showSearchBar, setShowSearchBar] = useState(false);
-  const [showNav, setShowNav] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loginPage, setLoginPage] = useState(true);
   const [signUpPage, setSignUpPage] = useState(false);
@@ -21,47 +21,39 @@ function App() {
     token ? setLoginSuccess(true) : setLoginSuccess(false);
   }, []);
 
-  const toggleNav = () => {
-    setShowNav(!showNav);
-  };
-
-  const toggleSearchBar = () => {
-    setShowSearchBar(!showSearchBar);
-    setShowNav(false);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <div>
-      {signUpPage && (
-        <SignUp
-          setSignUpPage={setSignUpPage}
-          setLoginPage={setLoginPage}
-          setLoginSuccess={setLoginSuccess}
-          setUserName={setUserName}
-        />
-      )}
-      {!loginSuccess && loginPage && (
-        <Login
-          setLoginSuccess={setLoginSuccess}
-          setUserName={setUserName}
-          setSignUpPage={setSignUpPage}
-          setLoginPage={setLoginPage}
-        />
-      )}
-      {loginSuccess && (
-        <>
-          <Header
-            toggleSearchBar={toggleSearchBar}
-            toggleNav={toggleNav}
-            showNav={showNav}
-            userName={userName}
-          />
-          <ClientList showSearchBar={showSearchBar} />
-        </>
-      )}
-
-      {/* <ClientDetails /> */}
+      <Router>
+        <DataProvider>
+          {signUpPage && (
+            <SignUp setSignUpPage={setSignUpPage} setLoginPage={setLoginPage} />
+          )}
+          {!loginSuccess && loginPage && (
+            <Login
+              setLoginSuccess={setLoginSuccess}
+              setUserName={setUserName}
+              setSignUpPage={setSignUpPage}
+              setLoginPage={setLoginPage}
+            />
+          )}
+          {loginSuccess && (
+            <>
+              <Header userName={userName} />
+              <Switch>
+                <Route exact path="/">
+                  <ClientList />
+                </Route>
+                <Route path="/add-client">
+                  <AddClient />
+                </Route>
+                <Route path="/clients/:id">
+                  <ClientDetails />
+                </Route>
+              </Switch>
+            </>
+          )}
+        </DataProvider>
+      </Router>
     </div>
   );
 }

@@ -1,17 +1,16 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useContext, useLayoutEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import DataContext from '../context/DataContext';
 
-const ClientList = ({ showSearchBar }) => {
+const ClientList = () => {
   const [clients, setClients] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const { showSearchBar } = useContext(DataContext);
 
   const filterList = (e) => {
     setSearchValue(e.target.value);
-  };
-
-  const showDetails = (e) => {
-    console.log(e.target._id);
   };
 
   const fetchClients = async () => {
@@ -33,7 +32,7 @@ const ClientList = ({ showSearchBar }) => {
       console.log(error);
     }
   };
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchClients();
   }, [clients]);
 
@@ -54,9 +53,11 @@ const ClientList = ({ showSearchBar }) => {
       {clients.length === 0 ? (
         <>
           <h2>No clients... &#128064;</h2>
-          <p>
-            Add new client <ion-icon name="add-circle-outline"></ion-icon>
-          </p>
+          <Link to="/add-client">
+            <p>
+              Add new client <ion-icon name="add-circle-outline"></ion-icon>
+            </p>
+          </Link>
         </>
       ) : (
         <h3>All Clients</h3>
@@ -76,12 +77,16 @@ const ClientList = ({ showSearchBar }) => {
           })
           .map((client) => {
             return (
-              <li key={client._id} onClick={showDetails}>
-                {client.name}
-                <span>
-                  <i class="fa fa-pencil"></i>
-                </span>
-              </li>
+              <ul>
+                <li key={client._id}>
+                  <Link to={`/clients/${client._id}`}>
+                    <p>{client.name}</p>
+                  </Link>
+                  <span>
+                    <i class="fa fa-pencil"></i>
+                  </span>
+                </li>
+              </ul>
             );
           })}
       </ul>
@@ -149,7 +154,7 @@ const ClientListContainerStyled = styled.main`
   p {
     font-size: clamp(1rem, 0.9vw, 1.4rem);
     color: var(--darkColor);
-    font-weight: 500;
+    /* font-weight: 500; */
   }
   ul {
     padding: 0;
@@ -167,6 +172,14 @@ const ClientListContainerStyled = styled.main`
       font-weight: 500;
       box-shadow: 0 2px 3px -2px var(--lightColor);
       cursor: pointer;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        width: 90%;
+        display: flex;
+        justify-items: left;
+      }
 
       .fa {
         background-color: #fff;
