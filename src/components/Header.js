@@ -118,6 +118,9 @@ const HeaderStyled = styled.header`
     display: flex;
     flex-direction: column;
 
+    a {
+      text-decoration: none;
+    }
     h3 {
       font-size: clamp(1rem, 1.1vw, 1.5rem);
       color: var(--bgColor);

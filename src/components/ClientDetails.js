@@ -5,14 +5,37 @@ import { useEffect, useState } from 'react';
 
 const ClientDetails = () => {
   const { id } = useParams();
-  const [client, setClient] = useState([]);
+  const [clientName, setClientName] = useState('');
+  const [measurements, setMeasurements] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const deleteClient = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.delete(
+        `https://measure-client-api.herokuapp.com/api/v1/clients/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setDeleteModal(false);
+      window.history.back();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchClientDetails = async () => {
       const token = localStorage.getItem('token');
       try {
         const {
-          data: { client },
+          data: {
+            client: { name, measurements },
+          },
         } = await axios.get(
           `https://measure-client-api.herokuapp.com/api/v1/clients/${id}`,
           {
@@ -21,73 +44,112 @@ const ClientDetails = () => {
             },
           }
         );
-        setClient(client);
-        console.log(client.measurements);
+        setClientName(name);
+        setMeasurements(measurements);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchClientDetails();
   }, [id]);
 
   return (
     <ClientDetailsStyled>
-      {client && (
-        <>
-          <h1>Client's measurements</h1>
-          <h3>Name: {client.name}</h3>
+      <>
+        <h1>Client's measurements</h1>
 
-          {client.measurements.lengthOfDress && (
-            <p>Dress length: {client.measurements.lengthOfDress} </p>
-          )}
+        {isLoading ? (
+          <div className="loading">Fetching measurements...</div>
+        ) : (
+          <>
+            {clientName && <h3>{clientName}</h3>}
 
-          {client.measurements.bust && <p>Bust: {client.measurements.bust}</p>}
+            <div className="measurements">
+              <div className="single-measurement">
+                <p>Dress length</p>{' '}
+                <span>{measurements.lengthOfDress || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p> Bust</p> <span>{measurements.bust || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Hips</p> <span>{measurements.hips || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Waist</p> <span>{measurements.waist || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Underbust length</p>
+                <span>{measurements.underbustLength || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Underbust circumference</p>
+                <span>{measurements.underbustCircumference || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p> Shoulder </p>
+                <span>{measurements.shoulder || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Sleeve</p> <span>{measurements.sleeve || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Arm</p> <span>{measurements.arm || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Crotch</p> <span>{measurements.crotch || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Skirt/Pant length</p>
+                <span>{measurements.skirtOrPantLength || 'N/A'}</span>
+              </div>
+              <div className="single-measurement">
+                <p>Band</p> <span>{measurements.band || 'N/A'}</span>{' '}
+              </div>
+              <div className="single-measurement">
+                <p> Bust point</p>{' '}
+                <span>{measurements.bustPoint || 'N/A'}</span>{' '}
+              </div>
+              <div className="single-measurement">
+                <p>Shoulder-knee</p>{' '}
+                <span>{measurements.shoulderToKnee || 'N/A'}</span>
+              </div>
+            </div>
 
-          {client.measurements.hips && <p>Hips: {client.measurements.hips}</p>}
+            <div className="actions">
+              <ion-icon name="create-outline"></ion-icon>
+              <ion-icon
+                name="trash-outline"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  setDeleteModal(true);
+                }}
+              ></ion-icon>
+            </div>
+          </>
+        )}
+      </>
 
-          {client.measurements.waist && (
-            <p>Waist: {client.measurements.waist}</p>
-          )}
-
-          {client.measurements.underbustLength && (
-            <p>Underbust length: {client.measurements.underbustLength}</p>
-          )}
-
-          {client.measurements.underbustCircumference && (
-            <p>
-              Underbust circ:
-              {client.measurements.underbustCircumference}
-            </p>
-          )}
-
-          {client.measurements.shoulder && (
-            <p>Shoulder: {client.measurements.shoulder} </p>
-          )}
-
-          {client.measurements.sleeve && (
-            <p>Sleeve: {client.measurements.sleeve}</p>
-          )}
-
-          {client.measurements.arm && <p>Arm: {client.measurements.arm}</p>}
-
-          {client.measurements.crotch && (
-            <p>Crotch: {client.measurements.crotch}</p>
-          )}
-
-          {client.measurements.skirtOrPantLength && (
-            <p>Skirt/Pant length: {client.measurements.skirtOrPantLength}</p>
-          )}
-
-          {client.measurements.band && <p>Band: {client.measurements.band} </p>}
-
-          {client.measurements.bustPoint && (
-            <p>Bust point: {client.measurements.bustPoint} </p>
-          )}
-
-          {client.measurements.shoulderToKnee && (
-            <p>Shoulder-knee: {client.measurements.shoulderToKnee}</p>
-          )}
-        </>
+      {deleteModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h1>Are you sure you want to delete this client?</h1>
+            <div className="btns">
+              <button
+                onClick={() => {
+                  setDeleteModal(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button className="delete-btn" onClick={deleteClient}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </ClientDetailsStyled>
   );
@@ -98,27 +160,98 @@ export default ClientDetails;
 const ClientDetailsStyled = styled.div`
   background-color: var(--bgColor);
   backdrop-filter: blur(0.1rem);
-  width: 93vw;
+  width: 95vw;
   margin-inline: auto;
-  padding: 5rem 2rem;
-  height: 100vh;
 
-  h1 {
-    font-size: clamp(1.2rem, 2vw, 3rem);
+  padding: 5rem 2rem;
+  padding-bottom: 2rem;
+  min-height: 100vh;
+
+  h1,
+  .loading {
+    font-size: clamp(1.3rem, 2vw, 3rem);
     color: var(--darkColor);
     text-align: center;
     margin-bottom: 1rem;
   }
 
+  .loading {
+    font-size: clamp(1rem, 1.3vw, 2rem);
+    color: var(--darkColorTrans);
+  }
+
   h3 {
     font-size: clamp(1rem, 1.6vw, 2.5rem);
     margin-bottom: 0.6rem;
-    color: var(--darkColorTrans);
+    color: var(--darkColor);
+    font-weight: 700;
+    text-align: center;
   }
-  p {
+  .measurements {
+    border-radius: 6px;
+    background-color: #faf8ff;
+  }
+  .single-measurement {
     font-size: clamp(0.9rem, 1.5vw, 2.5rem);
     margin-bottom: 0.4rem;
-
     color: var(--darkColorTrans);
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--darkColorTrans);
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      color: var(--darkColor);
+      font-weight: 500;
+    }
+  }
+  .single-measurement:last-child {
+    border: none;
+  }
+
+  .actions {
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: space-around;
+
+    ion-icon:nth-child(2) {
+      color: red;
+    }
+  }
+
+  .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    min-height: 100vh;
+    inset: 0 -5%;
+    z-index: 1;
+  }
+  .modal {
+    position: relative;
+    top: 30vh;
+    width: 85%;
+    margin-inline: auto;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 2rem;
+
+    .btns {
+      display: flex;
+      justify-content: space-around;
+
+      button {
+        padding: 0.3rem 0.8rem;
+        border: none;
+        border-radius: 5px;
+        font-size: clamp(0.9rem, 1.5vw, 2.5rem);
+        font-weight: 500;
+        color: var(--darkColor);
+      }
+
+      .delete-btn {
+        background-color: red;
+        color: #fff;
+      }
+    }
   }
 `;

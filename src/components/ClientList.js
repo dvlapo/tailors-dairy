@@ -8,6 +8,7 @@ const ClientList = () => {
   const [clients, setClients] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const { showSearchBar } = useContext(DataContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   const filterList = (e) => {
     setSearchValue(e.target.value);
@@ -26,6 +27,7 @@ const ClientList = () => {
           },
         }
       );
+      setIsLoading(false);
       setClients(clients);
     } catch (error) {
       localStorage.removeItem('token');
@@ -50,7 +52,9 @@ const ClientList = () => {
         </div>
       )}
 
-      {clients.length === 0 ? (
+      {isLoading ? (
+        <h3>Please wait...</h3>
+      ) : clients.length === 0 ? (
         <>
           <h2>No clients... &#128064;</h2>
           <Link to="/add-client">
@@ -62,6 +66,7 @@ const ClientList = () => {
       ) : (
         <h3>All Clients</h3>
       )}
+
       <ul>
         {clients
           // eslint-disable-next-line array-callback-return
@@ -83,7 +88,7 @@ const ClientList = () => {
                     <p>{client.name}</p>
                   </Link>
                   <span>
-                    <i class="fa fa-pencil"></i>
+                    <ion-icon name="create-outline"></ion-icon>
                   </span>
                 </li>
               </ul>
@@ -121,6 +126,10 @@ const ClientListContainerStyled = styled.main`
     ion-icon {
       color: var(--lightColor);
       z-index: -1;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     input {

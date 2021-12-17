@@ -54,13 +54,6 @@ select {
   }
 }
 
-@media (min-width: 450px) {
-  body {
-    max-width: 60vw;
-    margin-inline: auto;
-  }
-}
-
 :root {
   --lightColor: hsl(237, 15%, 75%);
   --lighterColor: hsl(330, 67%, 98%);
