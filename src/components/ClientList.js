@@ -108,6 +108,10 @@ const ClientListContainerStyled = styled.main`
   margin-inline: auto;
   margin-top: 20%;
 
+  @media (min-width: 435px) {
+    margin-top: 8%;
+  }
+
   .search-bar {
     border: 1px solid var(--lightColor);
     border-radius: 10px;

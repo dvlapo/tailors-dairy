@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import DataContext from '../context/DataContext';
 import { Link } from 'react-router-dom';
 
-const Header = ({ userName }) => {
+const Header = () => {
   const [greeting, setGreeting] = useState('');
   const { toggleSearchBar, toggleNav, showNav } = useContext(DataContext);
+  const [username, setUsername] = useState('');
 
   const logOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('tailorname');
     window.location.reload();
   };
 
@@ -34,17 +36,20 @@ const Header = ({ userName }) => {
         setGreeting('Good morning');
         break;
     }
+
+    const userName = localStorage.getItem('tailorname');
+    setUsername(userName);
   }, []);
 
   return (
     <HeaderContainerSyled>
       <HeaderStyled>
         <div className="nav-btn" onClick={toggleNav}>
-          <ion-icon name="grid-sharp"></ion-icon>
+          <ion-icon name="menu-sharp"></ion-icon>
         </div>
         {showNav && (
           <div className="nav">
-            <h3>{`${greeting}, ${userName} `} &#128515;</h3>
+            <h3>{`${greeting}, ${username} `} &#128515;</h3>
             <ul>
               <Link to="/" onClick={toggleNav}>
                 <li>
@@ -64,7 +69,7 @@ const Header = ({ userName }) => {
           </div>
         )}
 
-        <h2 className="logo">Measure</h2>
+        <h2 className="logo">Tailor's dairy</h2>
         <ion-icon name="search" onClick={toggleSearchBar}></ion-icon>
       </HeaderStyled>
     </HeaderContainerSyled>
@@ -99,7 +104,7 @@ const HeaderStyled = styled.header`
     display: grid;
     place-items: center;
     padding: 0.2rem;
-    border-radius: 5px;
+    border-radius: 6px;
     ion-icon {
       color: var(--darkColor);
     }
@@ -177,6 +182,8 @@ const HeaderStyled = styled.header`
     gap: 0.4rem;
     align-items: center;
     font-family: 'Montez', cursive;
+    font-size: clamp(1.2rem, 1.5vw, 1.7rem);
+
     color: var(--lightColor);
 
     span {

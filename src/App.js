@@ -14,7 +14,6 @@ function App() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loginPage, setLoginPage] = useState(true);
   const [signUpPage, setSignUpPage] = useState(false);
-  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -31,14 +30,13 @@ function App() {
           {!loginSuccess && loginPage && (
             <Login
               setLoginSuccess={setLoginSuccess}
-              setUserName={setUserName}
               setSignUpPage={setSignUpPage}
               setLoginPage={setLoginPage}
             />
           )}
           {loginSuccess && (
             <>
-              <Header userName={userName} />
+              <Header />
               <Switch>
                 <Route exact path="/">
                   <ClientList />

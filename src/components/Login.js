@@ -2,12 +2,7 @@ import { useState } from 'react';
 import { FormStyled } from './SignUp';
 import axios from 'axios';
 
-const Login = ({
-  setLoginSuccess,
-  setUserName,
-  setSignUpPage,
-  setLoginPage,
-}) => {
+const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [someError, setSomeError] = useState(false);
@@ -21,8 +16,8 @@ const Login = ({
       );
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('tailorname', data.user.username);
       setLoginSuccess(true);
-      setUserName(data.user.username);
     } catch (error) {
       console.log(error);
       setSomeError(true);

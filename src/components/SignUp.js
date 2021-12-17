@@ -27,6 +27,7 @@ const SignUp = ({
         { email, password }
       );
       localStorage.setItem('token', data.token);
+      localStorage.setItem('tailorname', data.user.username);
       if (data) {
         setLoginSuccess(true);
         setSignUpPage(false);
