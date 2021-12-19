@@ -6,6 +6,7 @@ import ClientList from './components/ClientList';
 import { useEffect, useState } from 'react';
 import { DataProvider } from './context/DataContext';
 import AddClient from './components/AddClient';
+import EditClient from './components/EditClient';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ClientDetails from './components/ClientDetails';
 
@@ -46,6 +47,9 @@ function App() {
                 </Route>
                 <Route path="/clients/:id">
                   <ClientDetails />
+                </Route>
+                <Route path="/edit-client/:id">
+                  <EditClient />
                 </Route>
               </Switch>
             </>

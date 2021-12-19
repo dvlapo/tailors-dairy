@@ -1,9 +1,56 @@
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useLayoutEffect, useState } from 'react';
+import { ClientFormStyled } from './AddClient';
+import { useParams } from 'react-router-dom';
+
 import axios from 'axios';
 
-const AddClient = () => {
+const EditClient = () => {
+  const { id } = useParams();
+  const token = localStorage.getItem('token');
   const [name, setName] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [measurements, setMeasurements] = useState({});
+
+  useLayoutEffect(() => {
+    const fetchClientDetails = async () => {
+      try {
+        const {
+          data: {
+            client: { name, measurements },
+          },
+        } = await axios.get(
+          `https://measure-client-api.herokuapp.com/api/v1/clients/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setName(name);
+        setMeasurements(measurements);
+        setDressLength(measurements.lengthOfDress);
+        setBust(measurements.bust);
+        setHalfLength(measurements.halfLength);
+        setHips(measurements.hips);
+        setWaist(measurements.waist);
+        setUnderbustLength(measurements.underbustLength);
+        setUnderbustCirc(measurements.underbustCircumference);
+        setShoulder(measurements.shoulder);
+        setSleeve(measurements.sleeve);
+        setArm(measurements.arm);
+        setCrotch(measurements.crotch);
+        setSkirtOrPantLength(measurements.skirtOrPantLength);
+        setBand(measurements.band);
+        setBustPoint(measurements.bustPoint);
+        setShoulderToKnee(measurements.shoulderToKnee);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchClientDetails();
+  }, [id, token]);
+
   const [dressLength, setDressLength] = useState('');
   const [bust, setBust] = useState('');
   const [halfLength, setHalfLength] = useState('');
@@ -14,13 +61,13 @@ const AddClient = () => {
   const [shoulder, setShoulder] = useState('');
   const [sleeve, setSleeve] = useState('');
   const [arm, setArm] = useState('');
-  const [crotch, setCrotch] = useState('');
+  const [crotch, setCrotch] = useState();
   const [skirtOrPantLength, setSkirtOrPantLength] = useState('');
   const [band, setBand] = useState('');
   const [bustPoint, setBustPoint] = useState('');
   const [shoulderToKnee, setShoulderToKnee] = useState('');
 
-  let measurements = {
+  let newMeasurements = {
     lengthOfDress: dressLength,
     bust,
     halfLength,
@@ -38,17 +85,15 @@ const AddClient = () => {
     shoulderToKnee,
   };
 
-  const token = localStorage.getItem('token');
-
-  const addClient = async (e) => {
+  const updateClient = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        'https://measure-client-api.herokuapp.com/api/v1/clients',
+      const { data } = await axios.patch(
+        `https://measure-client-api.herokuapp.com/api/v1/clients/${id}`,
         // eslint-disable-next-line no-undef
         {
           name,
-          measurements,
+          measurements: newMeasurements,
         },
         {
           headers: {
@@ -58,6 +103,7 @@ const AddClient = () => {
       );
       if (data) {
         window.history.back();
+        console.log(data);
       }
     } catch (error) {
       console.log(error);
@@ -66,7 +112,7 @@ const AddClient = () => {
 
   return (
     <ClientFormStyled>
-      <h2>Add new client</h2>
+      <h2>Editing client details</h2>
       <form>
         <div className="flex name-field">
           <label>Name:</label>
@@ -212,80 +258,10 @@ const AddClient = () => {
             onChange={(e) => setShoulderToKnee(e.target.value)}
           />
         </div>
-        <button onClick={addClient}>Add Client</button>
+        <button onClick={updateClient}>Done</button>
       </form>
     </ClientFormStyled>
   );
 };
 
-export default AddClient;
-
-export const ClientFormStyled = styled.div`
-  background-color: var(--bgColor);
-  backdrop-filter: blur(0.1rem);
-  width: 85%;
-  margin-inline: auto;
-  margin-bottom: 4rem;
-  padding: 5rem 1rem;
-  height: 100vh;
-  color: var(--darkColor);
-  z-index: 2;
-
-  h2 {
-    font-size: clamp(1.2rem, 2vw, 3rem);
-    color: var(--darkColor);
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  .name-field {
-    border-bottom: 1px solid var(--darkColorTrans);
-    padding-bottom: 0.6rem;
-  }
-  .flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.6rem;
-
-    input {
-      margin-right: 0;
-    }
-  }
-  .name-input,
-  .measurement-input {
-    margin-right: 1rem;
-    border: 1px solid var(--lightColor);
-    border-radius: 5px;
-    margin-right: auto;
-    padding: 0.1rem 0.5rem;
-    color: var(--darkColor);
-
-    &:focus {
-      border: 2px solid var(--darkColor);
-      outline: none;
-    }
-  }
-  .name-input {
-    width: 80%;
-  }
-  .measurement-input {
-    width: 40%;
-  }
-  label {
-    font-weight: 500;
-    font-size: clamp(0.9rem, 1vw, 1.1rem);
-  }
-
-  button {
-    width: 100%;
-    background-color: var(--darkColorTrans);
-    padding: 0.7rem 0.5rem;
-    font-size: clamp(1.1rem, 1.6vw, 3rem);
-    margin-block: 2rem;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-  }
-`;
+export default EditClient;

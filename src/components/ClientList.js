@@ -88,7 +88,9 @@ const ClientList = () => {
                     <p>{client.name}</p>
                   </Link>
                   <span>
-                    <ion-icon name="create-outline"></ion-icon>
+                    <Link to={`/edit-client/${client._id}`}>
+                      <ion-icon name="create-outline"></ion-icon>
+                    </Link>
                   </span>
                 </li>
               </ul>
@@ -188,22 +190,15 @@ const ClientListContainerStyled = styled.main`
       box-shadow: 0 2px 3px -2px var(--lightColor);
       cursor: pointer;
 
+      ion-icon {
+        font-size: clamp(1.5rem, 0.8vw, 1.4rem);
+      }
       a {
         text-decoration: none;
         color: inherit;
         width: 90%;
         display: flex;
         justify-items: left;
-      }
-
-      .fa {
-        background-color: #fff;
-        color: var(--darkColor);
-        font-weight: 500;
-        font-size: 1.1rem;
-        position: relative;
-        top: 2px;
-        z-index: 1;
       }
     }
   }

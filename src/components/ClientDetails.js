@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -164,7 +164,10 @@ const ClientDetails = () => {
             </div>
 
             <div className="actions">
-              <ion-icon name="create-outline"></ion-icon>
+              <Link to={`/edit-client/${id}`}>
+                <ion-icon name="create-outline"></ion-icon>
+              </Link>
+
               <ion-icon
                 name="trash-outline"
                 onClick={() => {
