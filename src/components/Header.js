@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [greeting, setGreeting] = useState('');
-  const { toggleSearchBar, toggleNav, showNav } = useContext(DataContext);
+  const { toggleSearchBar, toggleNav, showNav, setShowNav } =
+    useContext(DataContext);
   const [username, setUsername] = useState('');
 
   const logOut = () => {
@@ -48,24 +49,27 @@ const Header = () => {
           <ion-icon name="menu-sharp"></ion-icon>
         </div>
         {showNav && (
-          <div className="nav">
-            <h3>{`${greeting}, ${username} `} &#128515;</h3>
-            <ul>
-              <Link to="/" onClick={toggleNav}>
-                <li>
-                  All clients<ion-icon name="people-circle-sharp"></ion-icon>
-                </li>
-              </Link>
-              <Link to="/add-client" onClick={toggleNav}>
-                <li>
-                  Add new client<ion-icon name="add-circle-outline"></ion-icon>
-                </li>
-              </Link>
-            </ul>
+          <div className="nav-overlay" onClick={() => setShowNav(false)}>
+            <div className="nav">
+              <h3>{`${greeting}, ${username} `} &#128515;</h3>
+              <ul>
+                <Link to="/" onClick={toggleNav}>
+                  <li>
+                    All clients<ion-icon name="people-circle-sharp"></ion-icon>
+                  </li>
+                </Link>
+                <Link to="/add-client" onClick={toggleNav}>
+                  <li>
+                    Add new client
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                  </li>
+                </Link>
+              </ul>
 
-            <button onClick={logOut}>
-              Log out<ion-icon name="log-out-outline"></ion-icon>
-            </button>
+              <button onClick={logOut}>
+                Log out<ion-icon name="log-out-outline"></ion-icon>
+              </button>
+            </div>
           </div>
         )}
 
@@ -110,11 +114,17 @@ const HeaderStyled = styled.header`
     }
   }
 
-  .nav {
+  .nav-overlay {
+    min-width: 100vw;
     position: absolute;
     top: 7vh;
     left: 0;
-    min-width: 45vw;
+  }
+
+  .nav {
+    /* position: absolute;
+    top: 7vh; */
+    width: 55vw;
     min-height: 100vh;
     padding: 1rem;
     padding-left: 0.5rem;

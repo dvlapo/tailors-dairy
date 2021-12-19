@@ -228,12 +228,16 @@ const ClientDetailsStyled = styled.div`
   }
   .modal {
     position: relative;
-    top: 30vh;
+    top: 40vh;
     width: 85%;
     margin-inline: auto;
     border-radius: 8px;
     background-color: #fff;
     padding: 2rem;
+
+    h1 {
+      font-size: clamp(1.3rem, 2vw, 3rem);
+    }
 
     .btns {
       display: flex;

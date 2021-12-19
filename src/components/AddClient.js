@@ -68,7 +68,7 @@ const AddClient = () => {
     <AddNewClientStyled>
       <h2>Add new client</h2>
       <form>
-        <div className="flex">
+        <div className="flex name-field">
           <label>Name:</label>
           <input
             type="text"
@@ -77,7 +77,6 @@ const AddClient = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <hr />
         <div className="flex">
           <label>Dress length:</label>
           <input
@@ -238,11 +237,20 @@ const AddNewClientStyled = styled.div`
     text-align: center;
     margin-bottom: 1rem;
   }
+  .name-field {
+    border-bottom: 1px solid var(--darkColorTrans);
+    padding-bottom: 0.6rem;
+  }
   .flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     margin-bottom: 0.6rem;
+
+    input {
+      margin-right: 0;
+    }
   }
   .name-input,
   .measurement-input {
