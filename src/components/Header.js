@@ -156,14 +156,20 @@ const HeaderStyled = styled.header`
       @media (min-height: 810px) {
         margin-bottom: 36rem;
       }
+
       li {
         color: var(--bgColor);
         margin-bottom: 1rem;
         display: flex;
         gap: 0.5rem;
+        justify-content: center;
         align-items: center;
         font-size: clamp(0.9rem, 1vw, 1.4rem);
         font-weight: 500;
+        padding-block: 0.5rem;
+        border-radius: 4px;
+        background-color: var(--darkColor);
+
         ion-icon {
           color: inherit;
           font-size: 1.5rem;
@@ -174,15 +180,19 @@ const HeaderStyled = styled.header`
       margin-left: 2.5vw;
       border: none;
       display: flex;
+      justify-content: center;
       gap: 0.5rem;
       align-items: center;
       font-size: clamp(1rem, 1.3vw, 1.4rem);
-      background: none;
+      background: crimson;
       padding: 0;
-      color: red;
+      color: #fff;
+      padding-block: 0.5rem;
+      border-radius: 4px;
 
       ion-icon {
-        color: red;
+        color: #fff;
+        font-size: 1.5rem;
       }
     }
   }

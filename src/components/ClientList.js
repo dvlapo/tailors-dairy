@@ -170,7 +170,6 @@ const ClientListContainerStyled = styled.main`
   p {
     font-size: clamp(1rem, 0.9vw, 1.4rem);
     color: var(--darkColor);
-    /* font-weight: 500; */
   }
   ul {
     padding: 0;
