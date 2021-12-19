@@ -57,7 +57,7 @@ const ClientList = () => {
       ) : clients.length === 0 ? (
         <>
           <h2>No clients... &#128064;</h2>
-          <Link to="/add-client">
+          <Link to="/add-client" className="add-client-link">
             <p>
               Add new client <ion-icon name="add-circle-outline"></ion-icon>
             </p>
@@ -162,6 +162,9 @@ const ClientListContainerStyled = styled.main`
     ion-icon {
       font-size: 1.3rem;
     }
+  }
+  .add-client-link {
+    text-decoration: none;
   }
   .no-clients,
   p {

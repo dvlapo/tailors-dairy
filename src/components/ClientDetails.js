@@ -69,52 +69,97 @@ const ClientDetails = () => {
             <div className="measurements">
               <div className="single-measurement">
                 <p>Dress length</p>{' '}
-                <span>{measurements.lengthOfDress || 'N/A'}</span>
+                <span>
+                  {measurements.lengthOfDress
+                    ? measurements.lengthOfDress + '"'
+                    : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
-                <p> Bust</p> <span>{measurements.bust || 'N/A'}</span>
+                <p> Bust</p>{' '}
+                <span>
+                  {measurements.bust ? measurements.bust + '"' : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
-                <p>Hips</p> <span>{measurements.hips || 'N/A'}</span>
+                <p>Hips</p>{' '}
+                <span>
+                  {measurements.hips ? measurements.hips + '"' : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
-                <p>Waist</p> <span>{measurements.waist || 'N/A'}</span>
+                <p>Waist</p>{' '}
+                <span>
+                  {measurements.waist ? measurements.waist + '"' : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
                 <p>Underbust length</p>
-                <span>{measurements.underbustLength || 'N/A'}</span>
+                <span>
+                  {measurements.underbustLength
+                    ? measurements.underbustLength + '"'
+                    : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
                 <p>Underbust circumference</p>
-                <span>{measurements.underbustCircumference || 'N/A'}</span>
+                <span>
+                  {measurements.underbustCircumference
+                    ? measurements.underbustCircumference + '"'
+                    : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
                 <p> Shoulder </p>
-                <span>{measurements.shoulder || 'N/A'}</span>
+                <span>
+                  {measurements.shoulder ? measurements.shoulder + '"' : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
-                <p>Sleeve</p> <span>{measurements.sleeve || 'N/A'}</span>
+                <p>Sleeve</p>{' '}
+                <span>
+                  {measurements.sleeve ? measurements.sleeve + '"' : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
-                <p>Arm</p> <span>{measurements.arm || 'N/A'}</span>
+                <p>Arm</p>{' '}
+                <span>{measurements.arm ? measurements.arm + '"' : 'N/A'}</span>
               </div>
               <div className="single-measurement">
-                <p>Crotch</p> <span>{measurements.crotch || 'N/A'}</span>
+                <p>Crotch</p>{' '}
+                <span>
+                  {measurements.crotch ? measurements.crotch + '"' : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
                 <p>Skirt/Pant length</p>
-                <span>{measurements.skirtOrPantLength || 'N/A'}</span>
+                <span>
+                  {measurements.skirtOrPantLength
+                    ? measurements.skirtOrPantLength + '"'
+                    : 'N/A'}
+                </span>
               </div>
               <div className="single-measurement">
-                <p>Band</p> <span>{measurements.band || 'N/A'}</span>{' '}
+                <p>Band</p>{' '}
+                <span>
+                  {measurements.band ? measurements.band + '"' : 'N/A'}
+                </span>{' '}
               </div>
               <div className="single-measurement">
                 <p> Bust point</p>{' '}
-                <span>{measurements.bustPoint || 'N/A'}</span>{' '}
+                <span>
+                  {measurements.bustPoint
+                    ? measurements.bustPoint + '"'
+                    : 'N/A'}
+                </span>{' '}
               </div>
               <div className="single-measurement">
                 <p>Shoulder-knee</p>{' '}
-                <span>{measurements.shoulderToKnee || 'N/A'}</span>
+                <span>
+                  {measurements.shoulderToKnee
+                    ? measurements.shoulderToKnee + '"'
+                    : 'N/A'}
+                </span>
               </div>
             </div>
 
