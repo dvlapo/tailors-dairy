@@ -164,17 +164,23 @@ const ClientDetails = () => {
             </div>
 
             <div className="actions">
-              <Link to={`/edit-client/${id}`}>
-                <ion-icon name="create-outline"></ion-icon>
+              <Link to={`/edit-client/${id}`} className="edit-client-btn">
+                <div>
+                  <ion-icon name="create-outline"></ion-icon>
+                  <p>Edit client</p>
+                </div>
               </Link>
 
-              <ion-icon
-                name="trash-outline"
+              <div
+                className="delete-client-btn"
                 onClick={() => {
                   window.scrollTo(0, 0);
                   setDeleteModal(true);
                 }}
-              ></ion-icon>
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+                <p>Delete Client</p>
+              </div>
             </div>
           </>
         )}
@@ -262,11 +268,33 @@ const ClientDetailsStyled = styled.div`
     display: flex;
     justify-content: space-around;
 
-    ion-icon:nth-child(1) {
-      color: var(--darkColor);
+    a {
+      text-decoration: none;
     }
-    ion-icon:nth-child(2) {
-      color: red;
+    div,
+    a {
+      text-align: center;
+      width: 100%;
+      padding-block: 0.2rem;
+
+      ion-icon {
+        color: #fff;
+      }
+    }
+
+    .edit-client-btn {
+      background-color: var(--darkColorTrans);
+      border-bottom-left-radius: 6px;
+    }
+
+    .delete-client-btn {
+      background-color: crimson;
+      border-bottom-right-radius: 6px;
+    }
+
+    p {
+      font-size: clamp(0.8rem, 1.4vw, 2.3rem);
+      color: #fff;
     }
   }
 
@@ -290,21 +318,22 @@ const ClientDetailsStyled = styled.div`
       font-size: clamp(1.3rem, 2vw, 3rem);
     }
 
+    /* modal buttons */
     .btns {
       display: flex;
       justify-content: space-around;
 
       button {
-        padding: 0.3rem 0.8rem;
+        padding: 0.5rem 1rem;
         border: none;
-        border-radius: 5px;
+        border-radius: 6px;
         font-size: clamp(0.9rem, 1.5vw, 2.5rem);
         font-weight: 500;
         color: var(--darkColor);
       }
 
       .delete-btn {
-        background-color: red;
+        background-color: crimson;
         color: #fff;
       }
     }

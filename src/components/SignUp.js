@@ -137,12 +137,12 @@ const SignUp = ({
           </div>
         )}
 
+        <button onClick={signup}>Sign Up</button>
+
         <p>
           Already have an account? <span onClick={goToLogin}>Login </span>
           instead.
         </p>
-
-        <button onClick={signup}>Sign Up</button>
       </form>
     </FormStyled>
   );
@@ -210,7 +210,8 @@ export const FormStyled = styled.div`
   button {
     width: 100%;
     background-color: var(--darkColorTrans);
-    padding: 0.3rem 0.5rem;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
     font-size: clamp(1rem, 1.6vw, 3rem);
     border: none;
     border-radius: 5px;

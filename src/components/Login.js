@@ -67,11 +67,11 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
             <div></div>
           </div>
         )}
+        <button onClick={login}>Login</button>
         <p>
           Don't have an account? <span onClick={goToSignUp}>Sign up </span>
           instead.
         </p>
-        <button onClick={login}>Login</button>
       </form>
     </FormStyled>
   );
