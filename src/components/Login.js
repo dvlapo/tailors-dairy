@@ -6,15 +6,16 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [someError, setSomeError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post(
         'https://measure-client-api.herokuapp.com/api/v1/auth/login',
         { email, password }
       );
-
       localStorage.setItem('token', data.token);
       localStorage.setItem('tailorname', data.user.username);
       setLoginSuccess(true);
@@ -41,6 +42,7 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
           onChange={(e) => {
             setEmail(e.target.value);
             setSomeError(false);
+            setLoading(false);
           }}
         />
 
@@ -52,9 +54,19 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
           onChange={(e) => {
             setPassword(e.target.value);
             setSomeError(false);
+            setLoading(false);
           }}
         />
         {someError && <p className="error">Invalid email or password</p>}
+
+        {loading && !someError && (
+          <div className="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        )}
         <p>
           Don't have an account? <span onClick={goToSignUp}>Sign up </span>
           instead.

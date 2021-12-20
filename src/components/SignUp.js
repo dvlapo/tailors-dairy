@@ -14,6 +14,7 @@ const SignUp = ({
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordUnmatch, setPasswordUnmatch] = useState(false);
   const [emptyFields, setEmptyFields] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const goToLogin = () => {
     setSignUpPage(false);
@@ -26,15 +27,12 @@ const SignUp = ({
         'https://measure-client-api.herokuapp.com/api/v1/auth/login',
         { email, password }
       );
-      localStorage.setItem('token', data.token);
       localStorage.setItem('tailorname', data.user.username);
       if (data) {
         setLoginSuccess(true);
         setSignUpPage(false);
         setUserName(data.user.username);
       }
-
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -43,14 +41,16 @@ const SignUp = ({
   const signup = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
+      setLoading(true);
       try {
         const { data } = await axios.post(
           'https://measure-client-api.herokuapp.com/api/v1/auth/register',
           { username, email, password }
         );
-        console.log(data);
-
+        setSignUpPage(false);
         localStorage.setItem('token', data.token);
+        login();
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }
@@ -60,7 +60,6 @@ const SignUp = ({
     } else {
       setPasswordUnmatch(true);
     }
-    login();
   };
 
   return (
@@ -123,6 +122,15 @@ const SignUp = ({
         )}
         {emptyFields && (
           <p className="error">Fields cannot be empty, check again.</p>
+        )}
+
+        {loading && (
+          <div className="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         )}
 
         <p>
@@ -204,5 +212,65 @@ export const FormStyled = styled.div`
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
+  }
+
+  // loading animation
+  .lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 20px;
+    bottom: 1.5rem;
+  }
+  .lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--darkColorTrans);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
   }
 `;
