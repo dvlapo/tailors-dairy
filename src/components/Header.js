@@ -119,7 +119,7 @@ const HeaderStyled = styled.header`
 
   .nav-overlay {
     min-width: 100vw;
-    max-height: 93vh;
+    height: 93vh;
     position: absolute;
     top: 7vh;
     left: 0;
@@ -138,6 +138,7 @@ const HeaderStyled = styled.header`
 
     button {
       margin-left: 2.5vw;
+      margin-bottom: 3rem;
       border: none;
       display: flex;
       justify-content: center;

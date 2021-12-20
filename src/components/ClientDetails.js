@@ -262,6 +262,9 @@ const ClientDetailsStyled = styled.div`
     display: flex;
     justify-content: space-around;
 
+    ion-icon:nth-child(1) {
+      color: var(--darkColor);
+    }
     ion-icon:nth-child(2) {
       color: red;
     }
