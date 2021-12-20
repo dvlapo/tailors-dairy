@@ -27,7 +27,6 @@ const SignUp = ({
         'https://measure-client-api.herokuapp.com/api/v1/auth/login',
         { email, password }
       );
-      localStorage.setItem('tailorname', data.user.username);
       if (data) {
         setLoginSuccess(true);
         setSignUpPage(false);
@@ -49,6 +48,7 @@ const SignUp = ({
         );
         setSignUpPage(false);
         localStorage.setItem('token', data.token);
+        localStorage.setItem('tailorname', data.user.username);
         login();
         window.location.reload();
       } catch (error) {
@@ -75,6 +75,7 @@ const SignUp = ({
             setEmail(e.target.value);
             setPasswordUnmatch(false);
             setEmptyFields(false);
+            setLoading(false);
           }}
         />
 
@@ -89,6 +90,7 @@ const SignUp = ({
             setUsername(e.target.value);
             setPasswordUnmatch(false);
             setEmptyFields(false);
+            setLoading(false);
           }}
         />
 
@@ -103,6 +105,7 @@ const SignUp = ({
             setPassword(e.target.value);
             setPasswordUnmatch(false);
             setEmptyFields(false);
+            setLoading(false);
           }}
         />
 
@@ -115,6 +118,7 @@ const SignUp = ({
             setConfirmPassword(e.target.value);
             setPasswordUnmatch(false);
             setEmptyFields(false);
+            setLoading(false);
           }}
         />
         {passwordUnmatch && (

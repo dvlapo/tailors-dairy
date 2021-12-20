@@ -51,20 +51,23 @@ const Header = () => {
         {showNav && (
           <div className="nav-overlay" onClick={() => setShowNav(false)}>
             <div className="nav">
-              <h3>{`${greeting}, ${username} `} &#128515;</h3>
-              <ul>
-                <Link to="/" onClick={toggleNav}>
-                  <li>
-                    All clients<ion-icon name="people-circle-sharp"></ion-icon>
-                  </li>
-                </Link>
-                <Link to="/add-client" onClick={toggleNav}>
-                  <li>
-                    Add new client
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                  </li>
-                </Link>
-              </ul>
+              <div>
+                <h3>{`${greeting}, ${username} `} &#128515;</h3>
+                <ul>
+                  <Link to="/" onClick={toggleNav}>
+                    <li>
+                      All clients
+                      <ion-icon name="people-circle-sharp"></ion-icon>
+                    </li>
+                  </Link>
+                  <Link to="/add-client" onClick={toggleNav}>
+                    <li>
+                      Add new client
+                      <ion-icon name="add-circle-outline"></ion-icon>
+                    </li>
+                  </Link>
+                </ul>
+              </div>
 
               <button onClick={logOut}>
                 Log out<ion-icon name="log-out-outline"></ion-icon>
@@ -116,23 +119,42 @@ const HeaderStyled = styled.header`
 
   .nav-overlay {
     min-width: 100vw;
+    max-height: 93vh;
     position: absolute;
     top: 7vh;
     left: 0;
   }
 
   .nav {
-    /* position: absolute;
-    top: 7vh; */
     width: 55vw;
-    min-height: 100vh;
+    height: 93vh;
     padding: 1rem;
     padding-left: 0.5rem;
     background-color: var(--darkColorTrans);
     backdrop-filter: blur(0.1rem);
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
 
+    button {
+      margin-left: 2.5vw;
+      border: none;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: clamp(1rem, 1.3vw, 1.4rem);
+      background: crimson;
+      padding: 0;
+      color: #fff;
+      padding-block: 0.5rem;
+      border-radius: 4px;
+
+      ion-icon {
+        color: #fff;
+        font-size: 1.5rem;
+      }
+    }
     a {
       text-decoration: none;
     }
@@ -145,17 +167,6 @@ const HeaderStyled = styled.header`
       position: relative;
       padding: 0;
       margin-left: 2.5vw;
-      margin-bottom: clamp(18rem, 90vh, 33rem);
-
-      @media (max-width: 375px) {
-        margin-bottom: 26rem;
-      }
-      @media (max-width: 320px) {
-        margin-bottom: 23rem;
-      }
-      @media (min-height: 810px) {
-        margin-bottom: 36rem;
-      }
 
       li {
         color: var(--bgColor);
@@ -174,25 +185,6 @@ const HeaderStyled = styled.header`
           color: inherit;
           font-size: 1.5rem;
         }
-      }
-    }
-    button {
-      margin-left: 2.5vw;
-      border: none;
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      align-items: center;
-      font-size: clamp(1rem, 1.3vw, 1.4rem);
-      background: crimson;
-      padding: 0;
-      color: #fff;
-      padding-block: 0.5rem;
-      border-radius: 4px;
-
-      ion-icon {
-        color: #fff;
-        font-size: 1.5rem;
       }
     }
   }
