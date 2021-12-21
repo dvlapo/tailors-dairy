@@ -165,10 +165,8 @@ const ClientDetails = () => {
 
             <div className="actions">
               <Link to={`/edit-client/${id}`} className="edit-client-btn">
-                <div>
-                  <ion-icon name="create-outline"></ion-icon>
-                  <p>Edit client</p>
-                </div>
+                <ion-icon name="create-outline"></ion-icon>
+                <p>Edit client</p>
               </Link>
 
               <div
@@ -273,9 +271,12 @@ const ClientDetailsStyled = styled.div`
     }
     div,
     a {
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      padding-block: 0.2rem;
+      padding-block: 0.3rem;
 
       ion-icon {
         color: #fff;
