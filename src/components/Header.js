@@ -138,7 +138,7 @@ const HeaderStyled = styled.header`
 
     button {
       margin-left: 2.5vw;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       border: none;
       display: flex;
       justify-content: center;
