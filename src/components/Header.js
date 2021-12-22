@@ -76,7 +76,7 @@ const Header = () => {
           </div>
         )}
 
-        <h2 className="logo">Tailor's dairy</h2>
+        <h2 className="logo">Tailor's diary</h2>
         <ion-icon name="search" onClick={toggleSearchBar}></ion-icon>
       </HeaderStyled>
     </HeaderContainerSyled>
