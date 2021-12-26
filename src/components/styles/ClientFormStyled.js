@@ -30,6 +30,7 @@ const ClientFormStyled = styled.div`
 
     input {
       margin-right: 0;
+      font-size: 1.3rem;
     }
   }
   .name-input,
@@ -38,7 +39,7 @@ const ClientFormStyled = styled.div`
     border: 1px solid var(--lightColor);
     border-radius: 5px;
     margin-right: auto;
-    padding: 0.1rem 0.5rem;
+    padding: 0.2rem 0.5rem;
     color: var(--darkColor);
 
     &:focus {
@@ -60,8 +61,8 @@ const ClientFormStyled = styled.div`
   button {
     width: 100%;
     background-color: var(--darkColorTrans);
-    padding: 0.7rem 0.5rem;
-    font-size: clamp(1.1rem, 1.6vw, 3rem);
+    padding: 0.5rem 0.5rem;
+    font-size: clamp(1.3rem, 1.6vw, 3rem);
     margin-block: 2rem;
     border: none;
     border-radius: 5px;

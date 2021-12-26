@@ -31,7 +31,7 @@ const FormStyled = styled.div`
     padding: 0.5rem;
     border: 1px solid var(--lightColor);
     border-radius: 5px;
-    font-size: clamp(0.8rem, 1vw, 2.5rem);
+    font-size: clamp(1rem, 1vw, 2.5rem);
     caret-color: var(--darkColor);
 
     &:focus {
@@ -67,9 +67,9 @@ const FormStyled = styled.div`
   button {
     width: 100%;
     background-color: var(--darkColorTrans);
-    padding: 0.6rem;
     margin-top: 0.5rem;
-    font-size: clamp(1rem, 1.6vw, 3rem);
+    padding: 0.5rem;
+    font-size: clamp(1.3rem, 1.6vw, 3rem);
     border: none;
     border-radius: 5px;
     color: #fff;

@@ -8,10 +8,12 @@ const Header = () => {
   const { toggleSearchBar, toggleNav, showNav, setShowNav } =
     useContext(DataContext);
   const [username, setUsername] = useState('');
+  const [redirect, setRedirect] = useState(null);
 
   const logOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tailorname');
+    setRedirect(true);
     window.location.reload();
   };
 
@@ -71,7 +73,7 @@ const Header = () => {
 
               <button onClick={logOut}>
                 Log out<ion-icon name="log-out-outline"></ion-icon>
-                <Redirect to="/" />
+                {redirect && <Redirect to="/" />}
               </button>
             </div>
           </div>
