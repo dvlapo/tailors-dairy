@@ -12,6 +12,7 @@ const EditClient = () => {
   const [measurements, setMeasurements] = useState({});
 
   useLayoutEffect(() => {
+    window.scrollTo(0, 0);
     const fetchClientDetails = async () => {
       try {
         const {
