@@ -28,7 +28,7 @@ const FormStyled = styled.div`
   input {
     width: 100%;
     margin-bottom: 1rem;
-    padding: 0.3rem 0.5rem;
+    padding: 0.5rem;
     border: 1px solid var(--lightColor);
     border-radius: 5px;
     font-size: clamp(0.8rem, 1vw, 2.5rem);
@@ -37,6 +37,15 @@ const FormStyled = styled.div`
     &:focus {
       border: 2px solid var(--darkColorTrans);
       outline: none;
+    }
+  }
+  .input {
+    position: relative;
+    ion-icon {
+      position: absolute;
+      right: 0.7rem;
+      top: 0.6rem;
+      color: var(--darkColor);
     }
   }
 

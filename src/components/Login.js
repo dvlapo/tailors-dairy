@@ -7,6 +7,7 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
   const [password, setPassword] = useState('');
   const [someError, setSomeError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPasword] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
@@ -47,16 +48,30 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
         />
 
         <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          placeholder="******"
-          onChange={(e) => {
-            setPassword(e.target.value);
-            setSomeError(false);
-            setLoading(false);
-          }}
-        />
+        <div className="input">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            placeholder="******"
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setSomeError(false);
+              setLoading(false);
+            }}
+          />
+          {showPassword ? (
+            <ion-icon
+              name="eye-off-outline"
+              onClick={() => setShowPasword(false)}
+            ></ion-icon>
+          ) : (
+            <ion-icon
+              name="eye-outline"
+              onClick={() => setShowPasword(true)}
+            ></ion-icon>
+          )}
+        </div>
+
         {someError && <p className="error">Invalid email or password</p>}
 
         {loading && !someError && (
