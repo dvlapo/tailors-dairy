@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import DataContext from '../context/DataContext';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { HeaderStyled, HeaderContainerSyled } from './styles/HeaderStyled';
 
 const Header = () => {
@@ -71,6 +71,7 @@ const Header = () => {
 
               <button onClick={logOut}>
                 Log out<ion-icon name="log-out-outline"></ion-icon>
+                <Redirect to="/" />
               </button>
             </div>
           </div>
