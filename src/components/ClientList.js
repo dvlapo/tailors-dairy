@@ -36,7 +36,7 @@ const ClientList = () => {
   };
   useLayoutEffect(() => {
     fetchClients();
-  }, [clients]);
+  }, []);
 
   return (
     <ClientListContainerStyled>
