@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
-import { ClientFormStyled } from './AddClient';
+import ClientFormStyled from './styles/ClientFormStyled';
 import { useParams } from 'react-router-dom';
 
 import axios from 'axios';

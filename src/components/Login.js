@@ -1,5 +1,5 @@
+import FormStyled from './styles/FormStyled';
 import { useState } from 'react';
-import { FormStyled } from './SignUp';
 import axios from 'axios';
 
 const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
