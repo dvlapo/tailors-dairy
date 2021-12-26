@@ -67,7 +67,7 @@ const FormStyled = styled.div`
   button {
     width: 100%;
     background-color: var(--darkColorTrans);
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
     padding: 0.5rem;
     font-size: clamp(1.3rem, 1.6vw, 3rem);
     border: none;

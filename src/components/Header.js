@@ -1,19 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
 import DataContext from '../context/DataContext';
-import { Link, Redirect } from 'react-router-dom';
-import { HeaderStyled, HeaderContainerSyled } from './styles/HeaderStyled';
+import { Link } from 'react-router-dom';
+import { HeaderStyled, HeaderContainerStyled } from './styles/HeaderStyled';
 
 const Header = () => {
   const [greeting, setGreeting] = useState('');
   const { toggleSearchBar, toggleNav, showNav, setShowNav } =
     useContext(DataContext);
   const [username, setUsername] = useState('');
-  const [redirect, setRedirect] = useState(null);
 
   const logOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tailorname');
-    setRedirect(true);
     window.location.reload();
   };
 
@@ -45,7 +43,7 @@ const Header = () => {
   }, []);
 
   return (
-    <HeaderContainerSyled>
+    <HeaderContainerStyled>
       <HeaderStyled>
         <div className="nav-btn" onClick={toggleNav}>
           <ion-icon name="menu-sharp"></ion-icon>
@@ -72,8 +70,9 @@ const Header = () => {
               </div>
 
               <button onClick={logOut}>
-                Log out<ion-icon name="log-out-outline"></ion-icon>
-                {redirect && <Redirect to="/" />}
+                <Link to="/">
+                  Log out<ion-icon name="log-out-outline"></ion-icon>
+                </Link>
               </button>
             </div>
           </div>
@@ -82,7 +81,7 @@ const Header = () => {
         <h2 className="logo">Tailor's diary</h2>
         <ion-icon name="search" onClick={toggleSearchBar}></ion-icon>
       </HeaderStyled>
-    </HeaderContainerSyled>
+    </HeaderContainerStyled>
   );
 };
 

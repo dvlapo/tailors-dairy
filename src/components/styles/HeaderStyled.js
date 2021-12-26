@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HeaderContainerSyled = styled.div`
+export const HeaderContainerStyled = styled.div`
   position: fixed;
   top: 0;
   min-width: 100vw;
@@ -53,16 +53,21 @@ export const HeaderStyled = styled.header`
       margin-left: 2.5vw;
       margin-bottom: 3rem;
       border: none;
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      align-items: center;
-      font-size: clamp(1rem, 1.3vw, 1.4rem);
+
       background: crimson;
       padding: 0;
       color: #fff;
       padding-block: 0.5rem;
       border-radius: 4px;
+
+      a {
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: clamp(1rem, 1.3vw, 1.4rem);
+      }
 
       ion-icon {
         color: #fff;
