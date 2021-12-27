@@ -51,6 +51,7 @@ export const HeaderStyled = styled.header`
 
     button {
       margin-left: 2.5vw;
+      margin-bottom: 3rem;
       border: none;
       background: crimson;
       padding: 0;
