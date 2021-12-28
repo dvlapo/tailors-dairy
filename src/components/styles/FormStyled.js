@@ -9,6 +9,10 @@ const FormStyled = styled.div`
     margin-top: 10%;
   }
 
+  @media (min-width: 650px) {
+    max-width: 40vw;
+  }
+
   h1 {
     font-size: clamp(1.2rem, 2vw, 3rem);
     color: var(--darkColor);
@@ -65,6 +69,7 @@ const FormStyled = styled.div`
   }
 
   button {
+    font-family: 'Poppins', sans-serif;
     width: 100%;
     background-color: var(--darkColorTrans);
     margin-top: 1.5rem;

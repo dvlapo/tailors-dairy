@@ -5,10 +5,13 @@ const ClientDetailsStyled = styled.div`
   backdrop-filter: blur(0.1rem);
   width: 95vw;
   margin-inline: auto;
-
   padding: 5rem 2rem;
   padding-bottom: 2rem;
   min-height: 100vh;
+
+  @media (min-width: 650px) {
+    max-width: 50vw;
+  }
 
   h1,
   .loading {

@@ -9,6 +9,10 @@ const ClientListContainerStyled = styled.main`
     margin-top: 8%;
   }
 
+  @media (min-width: 650px) {
+    max-width: 50vw;
+  }
+
   .search-bar {
     border: 1px solid var(--lightColor);
     border-radius: 10px;

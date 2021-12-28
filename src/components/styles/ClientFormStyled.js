@@ -11,6 +11,10 @@ const ClientFormStyled = styled.div`
   color: var(--darkColor);
   z-index: 2;
 
+  @media (min-width: 650px) {
+    max-width: 50vw;
+  }
+
   h2 {
     font-size: clamp(1.2rem, 2vw, 3rem);
     color: var(--darkColor);
@@ -68,6 +72,7 @@ const ClientFormStyled = styled.div`
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
   }
 `;
 
