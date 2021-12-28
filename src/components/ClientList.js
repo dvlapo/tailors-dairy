@@ -53,7 +53,7 @@ const ClientList = () => {
       )}
 
       {isLoading ? (
-        <h3>Please wait...</h3>
+        <h3>Loading clients...</h3>
       ) : clients.length === 0 ? (
         <>
           <h2>No clients... &#128064;</h2>
