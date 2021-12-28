@@ -16,18 +16,6 @@ export const HeaderStyled = styled.header`
   height: 7vh;
   margin-inline: auto;
 
-  @media (min-width: 650px) {
-    max-width: 50vw;
-
-    .nav-overlay {
-      left: 25vw;
-    }
-
-    .nav {
-      width: 25vw !important;
-    }
-  }
-
   ion-icon {
     color: var(--lightColor);
   }
@@ -47,6 +35,7 @@ export const HeaderStyled = styled.header`
     height: 93vh;
     position: absolute;
     top: 7vh;
+    left: 0;
   }
 
   .nav {
@@ -129,6 +118,18 @@ export const HeaderStyled = styled.header`
 
     span {
       width: 2rem;
+    }
+  }
+
+  @media (min-width: 650px) {
+    max-width: 50vw;
+
+    .nav-overlay {
+      left: 25vw !important;
+    }
+
+    .nav {
+      width: 25vw !important;
     }
   }
 `;
