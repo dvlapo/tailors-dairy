@@ -21,7 +21,6 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
       localStorage.setItem('tailorname', data.user.username);
       setLoginSuccess(true);
     } catch (error) {
-      console.log(error);
       setSomeError(true);
     }
   };
@@ -61,12 +60,12 @@ const Login = ({ setLoginSuccess, setSignUpPage, setLoginPage }) => {
           />
           {showPassword ? (
             <ion-icon
-              name="eye-off-outline"
+              name="eye-outline"
               onClick={() => setShowPasword(false)}
             ></ion-icon>
           ) : (
             <ion-icon
-              name="eye-outline"
+              name="eye-off-outline"
               onClick={() => setShowPasword(true)}
             ></ion-icon>
           )}
